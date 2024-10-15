@@ -6,11 +6,21 @@ jobs:
   autograde:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       
-    - name: Set permissions
-      run: chmod +x test.sh
+      - name: Set permissions
+        run: chmod +x test.sh
 
-    - name: Run Autograding Test
-      run: ./test.sh
+      - name: Run Autograding Test
+        id: run_test
+        run: |
+          output=$(./test.sh)
+          echo "$output"
+          # Check if the test passed
+          if [[ "$output" == *"Test passed!"* ]]; then
+              echo "All checks passed!"
+          else
+              echo "Autograding test failed."
+              exit 1
+          fi
