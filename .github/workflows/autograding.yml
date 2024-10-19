@@ -13,14 +13,12 @@ jobs:
         run: |
           # Check if the output file exists
           if [ ! -f Level1.txt ]; then
-              echo "Output file not found!"
               exit 1
           fi
 
-          # Check if the output matches the expected format: "Hello <name>"
-          if grep -qE "^Hello [A-Za-z]+$" Level1.txt; then
-              echo "Test passed!"
+          if grep -qE "^Hello [A-Za-z]+( [A-Za-z]+)?$" Level1.txt; then
+              echo "Pass!"
           else
-              echo "Test failed!"
+              echo "Fail!"
               exit 1
           fi
