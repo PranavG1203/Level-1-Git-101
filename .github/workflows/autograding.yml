@@ -20,7 +20,7 @@ jobs:
       - name: Run Autograding Script
         id: grade-test
         run: |
-          ./grade.sh
+          ./script.sh
           if [ $? -eq 0 ]; then
               echo "score=10" >> $GITHUB_ENV
           else
